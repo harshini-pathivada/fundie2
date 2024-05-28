@@ -1,0 +1,109 @@
+import javalib.funworld.*; 
+import javalib.worldimages.*;  
+import java.awt.Color;
+import java.util.Random;
+
+
+//import tester.*;     
+
+abstract class Fish {
+  int x;
+  int y;
+  int size;
+  int speed;
+
+  Color color;
+  boolean isPlayer;
+
+  Fish(int x, int y, int size, int speed, Color color, boolean isPlayer) {
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.speed = speed;
+    
+    this.color = color;
+    this.isPlayer = isPlayer;
+  }
+
+  // Moving the fish and returns the new fish
+  abstract Fish move(String direction);
+    
+
+  WorldImage draw() {
+      return new EllipseImage(this.size, this.size, OutlineMode.SOLID, this.color);
+  }
+
+  boolean canEat(Fish other) {
+    return this.size > other.size;
+  } 
+
+  boolean hasBeenEaternBy(Fish other) {
+    return this.size < other.size;
+  }
+  
+}
+
+public class playerFish extends Fish {
+  playerFish(int x, int y, int size, int speed, Color color, boolean isPlayer) {
+    super(x, y, size, speed, color, isPlayer);
+  }
+
+  playerFish move(String direction) {
+    if (direction.equals("up")) this.y -= this.speed;
+    else if (direction.equals("down")) this.y += this.speed;
+    else if (direction.equals("left")) this.x -= this.speed;
+    else if (direction.equals("right")) this.x += this.speed;
+
+    if (this.x < 0) this.x = 0;
+    if (this.x > 500) this.x = 500;
+    if (this.y < 0) this.y = 0;
+    if (this.y > 500) this.y = 500;
+
+    return this;
+  }
+}
+
+public class backgroundFish extends Fish {
+  backgroundFish(int x, int y, int size, int speed, Color color, boolean isPlayer) {
+    super(x, y, size, speed, color, isPlayer);
+  }
+
+  backgroundFish move(String direction) {
+    if (direction.equals("up")) this.y -= this.speed;
+    else if (direction.equals("down")) this.y += this.speed;
+    else if (direction.equals("left")) this.x -= this.speed;
+    else if (direction.equals("right")) this.x += this.speed;
+
+    if (this.x < 0) this.x = 0;
+    if (this.x > 500) this.x = 500;
+    if (this.y < 0) this.y = 0;
+    if (this.y > 500) this.y = 500;
+
+    return this;
+  }
+}
+
+ public class pondWorld extends World {
+   playerFish player;
+
+   pondWorld(playerFish player) {
+     this.player = player;
+   }
+
+   public WorldScene makeScene() {
+     WorldScene scene = new WorldScene(500, 500);
+
+     scene.placeImageXY(this.player.draw(), this.player.x, this.player.y);
+     //need to finish later idk
+   }
+
+   public World onKey(String key) {
+     this.player = this.player.move(key);
+     
+   }
+
+   public World onTick() {
+     return this;
+     //need to finish later again
+   }
+ } 

@@ -25,9 +25,7 @@ abstract class Fish {
     this.isPlayer = isPlayer;
   }
 
-  // Moving the fish and returns the new fish
-  abstract Fish move(String direction);
-    
+  abstract Fish move(String direction);    
 
   WorldImage draw() {
       return new EllipseImage(this.size, this.size, OutlineMode.SOLID, this.color);

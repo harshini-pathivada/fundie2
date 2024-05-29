@@ -40,7 +40,7 @@ abstract class Fish {
 
 }
 
-public class playerFish extends Fish {
+ class playerFish extends Fish {
   playerFish(int x, int y, int size, int speed, Color color) {
     super(x, y, size, speed, color);
     
@@ -68,7 +68,7 @@ public class playerFish extends Fish {
   
 }
 
-public class backgroundFish extends Fish {
+class backgroundFish extends Fish {
   backgroundFish(int x, int y, int size, int speed, Color color) {
     super(x, y, size, speed, color);
     
@@ -154,7 +154,7 @@ class ConsLoFish implements ILoFish {
   }
 }
 
- public class pondWorld extends World {
+ class pondWorld extends World {
    playerFish player;
    ILoFish fishList;
    int tickCount;

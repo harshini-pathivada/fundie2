@@ -173,7 +173,7 @@ class ConsLoFish implements ILoFish {
    }
 
 
-   public playerFish onKeyEvent(String key) {
+   public pondWorld onKeyEvent(String key) {
      
      if (key.equals("up")) {
        this.player.move("up");
@@ -188,7 +188,7 @@ class ConsLoFish implements ILoFish {
        this.player.move("right");
      }
 
-     return this.player;
+     return this;
      
    }
 
